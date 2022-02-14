@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import { clientId, clientSecret } from "../../config";
+import axios from "axios";
 
 const tokens = new Map();
 
@@ -52,21 +53,15 @@ const requestToken = async (code, state) => {
   }
   try {
     console.log("were posting to git access token")
-    const response = await fetch(
-      'https://github.com/login/oauth/access_token',
-      {
-        method: 'POST',
-        body: {
+    const payload = {
           code,
           state,
-          clientId,
-          clientSecret
-        },
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
-    console.log(response)
-    const data = await response.json();
+          client_id: clientId,
+          client_secret: clientSecret
+    }
+    const res = await axios.post('https://github.com/login/oauth/access_token', {headers: {'Content-Type': 'application/json'}})
+    console.log(res)
+    const data = await res.data
     return data.access_token;
   } catch (error) {
     console.error(error);

@@ -59,7 +59,7 @@ const requestToken = async (code, state) => {
           client_id: clientId,
           client_secret: clientSecret
     }
-    const res = await axios.post('https://github.com/login/oauth/access_token', {headers: {'Content-Type': 'application/json'}})
+    const res = await axios.post('https://github.com/login/oauth/access_token', payload, {headers: {'Content-Type': 'application/json'}})
     console.log(res)
     const data = await res.data
     return data.access_token;

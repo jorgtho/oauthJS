@@ -13,6 +13,7 @@ export default async function handler(req, res) {
   }
 
   if (req.query.code && req.query.state) {
+    console.log("yeeeees")
     const token = await requestToken(req.query.code, req.query.state);
     tokens.set(String(req.query.state), Buffer.from(token));
 
@@ -45,10 +46,12 @@ export default async function handler(req, res) {
 }
 
 const requestToken = async (code, state) => {
+  console.log("CODE: ", code, "STATE: ", state)
   if (!code || !state) {
     return false;
   }
   try {
+    console.log("were posting to git access token")
     const response = await fetch(
       'https://github.com/login/oauth/access_token',
       {
@@ -57,12 +60,12 @@ const requestToken = async (code, state) => {
           code,
           state,
           clientId,
-          clientSecret,
+          clientSecret
         },
         headers: { 'Content-Type': 'application/json' },
       }
     );
-
+    console.log(response)
     const data = await response.json();
     return data.access_token;
   } catch (error) {

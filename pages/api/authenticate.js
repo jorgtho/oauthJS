@@ -5,8 +5,6 @@ import { clientId, clientSecret } from "../../config";
 const tokens = new Map();
 
 export default async function handler(req, res) {
-  console.log("fdodshfkdshf")
-  req.query.state = "fjdklsflidsjfds"
   const keyCount = Object.keys(req.query).length;
   if (keyCount < 1 || !req.query.state) {
     return res.status(502).json({
@@ -50,7 +48,6 @@ const requestToken = async (code, state) => {
   if (!code || !state) {
     return false;
   }
-  console.log("yopyoyoyo")
   try {
     const response = await fetch(
       'https://github.com/login/oauth/access_token',

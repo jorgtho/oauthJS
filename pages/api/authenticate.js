@@ -6,6 +6,7 @@ import axios from "axios";
 const tokens = new Map();
 
 export default async function handler(req, res) {
+  return res.status(200).end('Nothing to see here. Move along');
   const keyCount = Object.keys(req.query).length;
   if (keyCount < 1 || !req.query.state) {
     return res.status(502).json({
@@ -60,9 +61,8 @@ const requestToken = async (code, state) => {
           client_secret: clientSecret
     }
     const res = await axios.post('https://github.com/login/oauth/access_token', payload, {headers: {'Content-Type': 'application/json'}})
-    console.log(res)
     const data = await res.data
-    return data.access_token;
+    return data
   } catch (error) {
     console.error(error);
     return false;

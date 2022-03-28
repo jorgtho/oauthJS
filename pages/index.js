@@ -14,11 +14,12 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Hello there!
+          Hello there.
         </h1>
+        <Image src="/obiMan.png" alt="me" width={1200} height={600} />
 
         <p className={styles.description}>
-          Click on the link to authenticate with Github <a href={authUrl}>Click here :)</a>
+          jrelease uses Github device flow - so this is just a placeholder for the OAuth app.
         </p>
       </main>
 
